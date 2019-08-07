@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 `ambientweatheR` provides programmatic access to an Ambient Weather user's weather station data via REST API. 
 
-Ambient Weather API documentation available [HERE](https://ambientweather.docs.apiary.io/#introduction/authentication).
+Ambient Weather API documentation available [HERE](https://ambientweather.docs.apiary.io/#).
 
 Main functions:
 
