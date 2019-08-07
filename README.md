@@ -43,15 +43,6 @@ df %>%
   gather(key = "key", value = "value", -date_time) %>% 
   ggplot(aes(x = date_time, y = value, colour = key)) + 
   geom_point()
-#> Warning: `lang()` is deprecated as of rlang 0.2.0.
-#> Please use `call2()` instead.
-#> This warning is displayed once per session.
-#> Warning: `new_overscope()` is deprecated as of rlang 0.2.0.
-#> Please use `new_data_mask()` instead.
-#> This warning is displayed once per session.
-#> Warning: `overscope_eval_next()` is deprecated as of rlang 0.2.0.
-#> Please use `eval_tidy()` with a data mask instead.
-#> This warning is displayed once per session.
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />

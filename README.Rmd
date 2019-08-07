@@ -51,7 +51,7 @@ df <- seq.Date(as.Date("2019-08-01"), as.Date("2019-08-04"), "day") %>%
 load(system.file("extdata", "sysdata.rda", package = "ambientweatheR"))
 ```
 
-```{r}
+```{r, warning = FALSE}
 df %>% 
   select(date_time, tempf, feelsLike) %>% 
   gather(key = "key", value = "value", -date_time) %>% 
