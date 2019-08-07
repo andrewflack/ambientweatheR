@@ -1,0 +1,21 @@
+Package: ambientweatheR
+Type: Package
+Title: Tools to Interact with the Ambient Weather API
+Version: 0.1.0
+Author: Andrew Flack
+Maintainer: Andrew Flack <flack.andrew@gmail.com>
+Description: Provides programmatic access to an Ambient Weather 
+    user's weather station data via REST API.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    httr,
+    purrr,
+    lubridate,
+    dplyr
+RoxygenNote: 6.1.1
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
