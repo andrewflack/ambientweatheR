@@ -28,18 +28,18 @@ library(tidyverse)
 ```
 
 ``` r
-mac_address <- list_user_devices() %>% pluck("macAddress")
+mac_address <- list_user_devices() %>% flatten() %>% pluck("macAddress")
 ```
 
 ``` r
 df <- seq.Date(as.Date("2019-08-01"), as.Date("2019-08-04"), "day") %>% 
   map(as.character) %>% 
-  map_df(~ fetch_device_data(mac_address, .x))
+  map_df(~ fetch_device_data(mac_address, .x)$content)
 ```
 
 ``` r
 df %>% 
-  select(date_time, tempf, feelsLike) %>% 
+  select(date_time, tempf, feelsLike, dewPoint) %>% 
   gather(key = "key", value = "value", -date_time) %>% 
   ggplot(aes(x = date_time, y = value, colour = key)) + 
   geom_point()

@@ -13,7 +13,8 @@ Imports:
     httr,
     purrr,
     lubridate,
-    dplyr
+    dplyr,
+    jsonlite
 RoxygenNote: 6.1.1
 Suggests: 
     knitr,

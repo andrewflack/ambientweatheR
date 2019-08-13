@@ -9,7 +9,32 @@ list_user_devices <- function(){
 
   response <- httr::GET(url = url)
 
-  httr::stop_for_status(response)
+  if (httr::http_type(response) != "application/json") {
+    stop("API did not return json", call. = FALSE)
+  }
 
-  return(purrr::flatten(httr::content(response)))
+  parsed <- jsonlite::fromJSON(httr::content(response, "text"), simplifyVector = FALSE)
+
+  if (httr::http_error(response)) {
+    stop(
+      sprintf(
+        "AmbientWeather API request failed [%s] %s",
+        httr::status_code(response),
+        parsed$error
+      ),
+      call. = FALSE
+    )
+  }
+
+  # Pause 1 second to comply with 1 request/sec rate cap
+  Sys.sleep(1)
+
+  structure(
+    list(
+      content = parsed %>% purrr::flatten(),
+      response = response
+    ),
+    class = "ambientweather_api"
+  )
+
 }

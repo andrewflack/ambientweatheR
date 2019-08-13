@@ -3,9 +3,6 @@
 \name{get_or_set_application_key}
 \alias{get_or_set_application_key}
 \title{Get or set Ambient Weather application key}
-\source{
-Environment variable approach (and code) based on the \href{https://github.com/hrbrmstr/darksky}{darksky} package by Bob Rudis.
-}
 \usage{
 get_or_set_application_key(force = FALSE)
 }
@@ -14,4 +11,7 @@ get_or_set_application_key(force = FALSE)
 }
 \description{
 Get or set Ambient Weather application key
+}
+\seealso{
+\code{get_or_set_api_key}
 }

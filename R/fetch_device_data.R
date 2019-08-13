@@ -23,9 +23,25 @@ fetch_device_data <- function(mac_address, date = NULL) {
 
   response <- httr::GET(url = url)
 
-  httr::stop_for_status(response)
+  if (httr::http_type(response) != "application/json") {
+    stop("API did not return json", call. = FALSE)
+  }
 
-  out <- purrr::map_df(httr::content(response), ~.x) %>%
+  parsed <- jsonlite::fromJSON(httr::content(response, "text"), simplifyVector = FALSE)
+
+  if (httr::http_error(response)) {
+    stop(
+      sprintf(
+        "AmbientWeather API request failed [%s] %s",
+        httr::status_code(response),
+        parsed$error
+      ),
+      call. = FALSE
+    )
+  }
+
+  out <- parsed %>%
+    purrr::map_df(~.x) %>%
     # reorder columns (move date column to first position)
     dplyr::select(date_time = date, dplyr::everything(), -dateutc) %>%
     dplyr::mutate(date_time = lubridate::with_tz(lubridate::as_datetime(date_time, "UTC"), Sys.timezone())) %>%
@@ -40,5 +56,11 @@ fetch_device_data <- function(mac_address, date = NULL) {
   # Pause 1 second to comply with 1 request/sec rate cap
   Sys.sleep(1)
 
-  return(out)
+  structure(
+    list(
+      content = out,
+      response = response
+    ),
+    class = "ambientweather_api"
+  )
 }
