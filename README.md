@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-ambientweatheR
---------------
+ambientweatheR <img src="inst/figures/hex_logo.png" align="right" height = 150/>
+--------------------------------------------------------------------------------
 
 `ambientweatheR` provides programmatic access to an Ambient Weather user's weather station data via REST API.
 
